@@ -66,6 +66,17 @@
         then leosoc is for you! </h1>
       </div>
     </div>
+    <div class="container rel">
+      <div class="card rel clearfix ls-intro-section">
+          <div class="text-center">
+          <h1>
+          <b> <div id="this_session"></div> </b>
+          <br />
+          in <b>EEE 403a</b> between <b> 6:30 - 8:30 </b>
+          </h1>
+          </div>
+      </div>
+    </div>
 
     <div class="container rel">
       <div class="card rel clearfix ls-intro-section">
@@ -134,5 +145,59 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="assets/js/rotate.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script>
+    var currentDate = new Date();
+    //var currentDate = new Date(2017, 1, 6, 17, 30, 0 , 0);
+
+    //  The start date of the first session in term
+    //  We set the time to 8:30 when the session ends so that's when the
+    //  site ticks over
+    var sessionStartDate = new Date(2017, 0, 16, 20, 30, 0, 0);
+
+    var sessionsList = [
+    "watercolour portraits",
+    "life drawing",
+    "introduction to oils",
+    "life drawing",
+    "pencil drawing: 'drawing on the right side of the brain'",
+    "life drawing with clay",
+    "watercolours",
+    "acrylics"
+    ];
+
+    function daysBetween(date1, date2) {
+      //  A single day in milliseconds
+      var oneDay = 1000 * 60 * 60 * 24;
+
+      var date1Ms = date1.getTime();
+      var date2Ms = date2.getTime();
+
+      var differenceMs = date2Ms - date1Ms;
+
+      // Return difference in days
+      return Math.floor(differenceMs / oneDay);
+    }
+
+    //  Find the session to display always rounding to the next week
+    function closest_session(testDate, startDate, sessionsList) {
+
+      var defaultStart = "monday's session: ";
+
+      var daysDiff = daysBetween(startDate, testDate);
+      if (daysDiff < 0) return defaultStart + sessionsList[0];
+
+      var index = Math.floor(1 + daysDiff / 7);
+
+      if (index >= sessionsList.length) {
+        return "no more sessions this term!";
+      }
+      return defaultStart + sessionsList[index];
+    }
+
+    var txt = closest_session(currentDate, sessionStartDate, sessionsList);
+
+    //  Replace div in html with result from function
+    $("#this_session").text(txt);
+    </script>
   </body>
 </html>
