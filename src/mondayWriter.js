@@ -1,10 +1,4 @@
 var currentDate = new Date();
-//var currentDate = new Date(2017, 1, 6, 17, 30, 0 , 0);
-
-//  The start date of the first session in term
-//  We set the time to 8:30 when the session ends so that's when the
-//  site ticks over
-var sessionStartDate = new Date(2017, 0, 16, 20, 30, 0, 0);
 
 function daysBetween(date1, date2) {
   //  A single day in milliseconds
@@ -23,22 +17,44 @@ function daysBetween(date1, date2) {
 //
 //  sesssionsList is defined in data/sessionList.js
 //
-function closest_session(testDate, startDate, sessionsList) {
+function closestSession(testDate, sessionSchedule) {
 
-  var defaultStart = "monday's session: ";
+  var startDate = sessionSchedule.startDate;
+  var sessionsList = sessionSchedule.sessions;
 
   var daysDiff = daysBetween(startDate, testDate);
-  if (daysDiff < 0) return defaultStart + sessionsList[0];
+  if (daysDiff < 0) return sessionsList[0];
 
   var index = Math.floor(1 + daysDiff / 7);
 
   if (index >= sessionsList.length) {
-    return "no more sessions this term!";
+    return undefined;	//  Is this bad javscript practise?
   }
-  return defaultStart + sessionsList[index];
+  return sessionsList[index];
 }
 
-var txt = closest_session(currentDate, sessionStartDate, sessionsList);
+function setSession(session) {
+  var sessionText = "";
+  var defaultLocation = "EEE 403a"
+  var defaultTime = "6:30 - 8:30";
 
-//  Replace div in html with result from function
-$("#this_session").text(txt);
+  if (typeof session === undefined || session === {}) {
+    sessionText = "no more sessions this term!";
+    sessionLocation = "";
+  }
+  else {
+    sessionText = session.name;
+    sessionLocation = session.location.length > 0 ? session.location : defaultLocation;
+    sessionTime     = session.time.length     > 0 ? session.time     : defaultTime;
+  }
+  
+  //  Replace div in html with result from function
+  var txt = boldText("next session: " + sessionText) + "<br/>in " + boldText(sessionLocation) + " from " + boldText(sessionTime);
+  $("#this_session").append(txt);
+}
+
+function boldText(txt) {
+  return "<b>" + txt + "</b>";
+}
+
+setSession(closestSession(currentDate, currentSchedule));
