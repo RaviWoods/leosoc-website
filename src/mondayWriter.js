@@ -34,22 +34,24 @@ function closestSession(testDate, sessionSchedule) {
 }
 
 function setSession(session) {
-  var sessionText = "";
+  var txt = "";
+
   var defaultLocation = "EEE 403a"
   var defaultTime = "6:30 - 8:30";
 
-  if (typeof session === undefined || session === {}) {
-    sessionText = "no more sessions this term!";
-    sessionLocation = "";
+  //  Also, is this the correct styling here?
+  if (session === undefined) {
+    txt = "no more sessions this term :(";
   }
   else {
-    sessionText = session.name;
-    sessionLocation = session.location.length > 0 ? session.location : defaultLocation;
-    sessionTime     = session.time.length     > 0 ? session.time     : defaultTime;
+    var sessionText = session.name;
+    var sessionLocation = session.location.length > 0 ? session.location : defaultLocation;
+    var sessionTime     = session.time.length     > 0 ? session.time     : defaultTime;
+    txt = boldText("next session: " + sessionText) + "<br/>in " +
+          boldText(sessionLocation) + " from " + boldText(sessionTime);
   }
   
   //  Replace div in html with result from function
-  var txt = boldText("next session: " + sessionText) + "<br/>in " + boldText(sessionLocation) + " from " + boldText(sessionTime);
   $("#this_session").append(txt);
 }
 
