@@ -67,6 +67,15 @@ body .nopad {
 
 /* LEOSOC SPECIFIC  */
 
+.ls-centered-col{
+    float: none;
+    margin: 0 auto;
+}
+
+.ls-picture-card {
+	padding: 0 0 0 0 !important;
+}
+
 .ls-spacer {
 	height: 7px;
 	width: 100%;
@@ -78,18 +87,31 @@ body .nopad {
 	text-align: right !important;
 }
 
-.ls-top-text {
+.ls-light-orange {
 	background-color: #FFC857;
 }
 
-.ls-sessions-box {
-	background-color: rgb(26,143,227) !important;
+.ls-dark-blue {
+	background-color: #419DDF !important;
+}
+
+.ls-light-blue {
+	background-color: #89D2DC;
+}
+
+.ls-white-text {
+	color: white !important;
+}
+
+.ls-black-text {
+	color: black !important;
 }
 
 .ls-box-title {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 37px !important;
+	color: black !important;
 }
 
 .lower {
