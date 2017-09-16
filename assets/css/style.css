@@ -72,12 +72,19 @@ body .nopad {
     margin: 0 auto;
 }
 
+#ls-fb-events {
+	border:none;
+	overflow:hidden; 
+	width:500px;
+	height:200px;
+}
+
 .ls-picture-card {
 	padding: 0 0 0 0 !important;
 }
 
 .ls-spacer {
-	height: 7px;
+	height: 50px;
 	width: 100%;
 }
 
@@ -87,16 +94,23 @@ body .nopad {
 	text-align: right !important;
 }
 
-.ls-light-orange {
-	background-color: #FFC857;
+.ls-light-grey {
+	background-color: #ddd !important;
 }
 
+.ls-light-orange {
+	background-color: #FFC857 !important;
+}
+
+.ls-dark-orange {
+	background-color: #FF6927 !important;
+}
 .ls-dark-blue {
 	background-color: #419DDF !important;
 }
 
 .ls-light-blue {
-	background-color: #89D2DC;
+	background-color: #89D2DC !important;
 }
 
 .ls-white-text {
